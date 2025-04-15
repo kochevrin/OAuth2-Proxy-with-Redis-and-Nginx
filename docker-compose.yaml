@@ -3,7 +3,7 @@ services:
     image: ${REDIS_IMAGE}
     restart: unless-stopped
     networks:
-      - oauth2-proxy-network
+      - calendar-oauth2-network
 
   oauth2-proxy:
     image: ${OAUTH2_PROXY_IMAGE}
@@ -24,8 +24,8 @@ services:
       - OAUTH2_PROXY_REDIS_CONNECTION_URL=${OAUTH2_PROXY_REDIS_CONNECTION_URL}
       - OAUTH2_PROXY_SESSION_STORE_TYPE=${OAUTH2_PROXY_SESSION_STORE_TYPE}
     networks:
-      - npm-network
-      - oauth2-proxy-network
+      - nginx-proxy-manager
+      - calendar-oauth2-network
     expose:
       - "4180"
     depends_on:
@@ -38,12 +38,12 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     networks:
-      - oauth2-proxy-network
+      - calendar-oauth2-network
     expose:
       - "80"
 
 networks:
-  npm-network:
+  nginx-proxy-manager:
     external: true
-  oauth2-proxy-network:
+  calendar-oauth2-network:
     driver: bridge

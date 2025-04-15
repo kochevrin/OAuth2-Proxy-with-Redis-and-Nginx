@@ -36,7 +36,7 @@ This repository contains a Dockerized setup for an OAuth2 Proxy using Redis as t
 
 3. Generate a secure cookie secret:
    ```bash
-   openssl rand -base64 32 | tr -d '\n'
+   openssl rand -base64 32 | head -c 32
    ```
    Copy the output and set it as the value for `OAUTH2_PROXY_COOKIE_SECRET` in your `.env` file.
 
@@ -86,7 +86,7 @@ Below are the key environment variables you need to configure in your `.env` fil
 
 - **Generate Cookie Secret**:
   ```bash
-  openssl rand -base64 32 | tr -d '\n'
+  openssl rand -base64 32 | head -c 32
   ```
 - **Start Services**:
   ```bash
